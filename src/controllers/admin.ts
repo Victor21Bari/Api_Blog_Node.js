@@ -6,8 +6,7 @@ import { getUserById } from "../services/userService";
 import { coverToUrl } from "../utils/cover-to-url";
 
 export const addPost = async (req: ExtendedRequest, res: Response) => {
-    console.log('req.body:', req.body);
-    console.log('req.file:', req.file);
+
     if (!req.user) {
         res.status(401).json({
             error: "Usuário não autenticado."
@@ -23,7 +22,6 @@ export const addPost = async (req: ExtendedRequest, res: Response) => {
     });
 
 
-    console.log("Dados recebidos:", req.body);
     const data = schema.safeParse(req.body);
     if (!data.success) {
         res.status(400).json({
@@ -60,10 +58,9 @@ export const addPost = async (req: ExtendedRequest, res: Response) => {
         cover: coverName
     });
 
-    //pegar informação do autor
     const author = await getUserById(newPost.authorId);
 
-    //fazer retorno segundo o plano
+
 
     res.status(201).json({
         post: {
@@ -137,7 +134,6 @@ export const removePost = async (req: ExtendedRequest, res: Response) => {
     const { slug } = req.params;
 
     const post = await getPostBySlug(slug);
-    console.log("POST:", post)
     if (!post) {
         res.json({
             error: "Post inexistente"
@@ -166,7 +162,6 @@ export const getPosts = async (req: ExtendedRequest, res: Response) => {
     }
 
     let posts = await getAllPosts(page);
-    console.log("post especififco: ", posts)
     const postsToReturn = posts.map(post => ({
         id: post.id,
         status: post.status,
@@ -189,7 +184,6 @@ export const getPost = async (req: ExtendedRequest, res: Response) => {
     const { slug } = req.params;
 
     const post = await getPostBySlug(slug);
-    console.log("POST:", post)
     if (!post) {
         res.json({
             error: "Post inexistente"

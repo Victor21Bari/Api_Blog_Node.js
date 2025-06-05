@@ -32,7 +32,7 @@ export const signup: RequestHandler = async (req, res) => {
         }
 
         const token = createToken(newUser);
-        console.log('ususairo: ', newUser)
+        
 
         res.status(201).json({
             user: {
@@ -44,7 +44,6 @@ export const signup: RequestHandler = async (req, res) => {
         });
 
     } catch (err) {
-        console.error('Erro interno:', err);
         res.status(500).json({
             error: 'Erro interno no servidor.'
         });

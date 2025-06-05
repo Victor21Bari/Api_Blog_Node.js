@@ -82,12 +82,10 @@ export const handleCover = async (file: Express.Multer.File) => {
                 file.path,
                 `./public/imagens/cover/${coverName}`
             );
-            console.log('coverName: ', coverName)
             return coverName
 
         }
     } catch (error) {
-        console.log('Erro na imagem', file.mimetype)
         return false
     }
 }

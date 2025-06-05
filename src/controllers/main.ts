@@ -39,7 +39,6 @@ export const getPost: RequestHandler = async (req, res) => {
     const { slug } = req.params;
 
     const post = await getPostBySlug(slug);
-    console.log("POST:", post)
     if (!post || (post && post.status !== 'PUBLISHED')) {
         res.json({
             error: "Post inexistente"
